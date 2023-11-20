@@ -1,0 +1,16 @@
+{
+	"name": "CBSInflationRest",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "CBSRest",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"tableCode": "70936eng"
+			}
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

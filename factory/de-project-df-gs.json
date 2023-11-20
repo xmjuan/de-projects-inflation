@@ -1,0 +1,9 @@
+{
+	"name": "de-project-df-gs",
+	"location": "northeurope",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "5b7da6dd-4765-49c3-a13a-a94aca4d9447",
+		"tenantId": "058ec02b-7394-4cc3-b1d6-3b7a54334e18"
+	}
+}

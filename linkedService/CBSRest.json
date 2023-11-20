@@ -1,0 +1,19 @@
+{
+	"name": "CBSRest",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"parameters": {
+			"tableCode": {
+				"type": "string",
+				"defaultValue": "70936eng"
+			}
+		},
+		"annotations": [],
+		"type": "RestService",
+		"typeProperties": {
+			"url": "@{concat('https://opendata.cbs.nl/ODataApi/odata/',linkedService().tableCode,'/TypedDataSet')}",
+			"enableServerCertificateValidation": false,
+			"authenticationType": "Anonymous"
+		}
+	}
+}

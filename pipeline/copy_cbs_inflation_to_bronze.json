@@ -1,0 +1,95 @@
+{
+	"name": "copy_cbs_inflation_to_bronze",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy inflation from CBS",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "RestSource",
+						"httpRequestTimeout": "00:01:40",
+						"requestInterval": "00.00:00:00.010",
+						"requestMethod": "GET",
+						"paginationRules": {
+							"supportRFC5988": "true"
+						}
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings",
+							"copyBehavior": "PreserveHierarchy"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "['ID']"
+								},
+								"sink": {
+									"path": "ID"
+								}
+							},
+							{
+								"source": {
+									"path": "['Periods']"
+								},
+								"sink": {
+									"path": "Periods"
+								}
+							},
+							{
+								"source": {
+									"path": "['AnnualRateOfChange_1']"
+								},
+								"sink": {
+									"path": "AnnualRateOfChange_1"
+								}
+							},
+							{
+								"source": {
+									"path": "['AnnualRateOfChangeDerived_2']"
+								},
+								"sink": {
+									"path": "AnnualRateOfChangeDerived_2"
+								}
+							}
+						],
+						"collectionReference": "$['value']"
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "CBSInflationRest",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "CBSInflationBronze",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-11-20T13:47:32Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
